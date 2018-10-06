@@ -1,0 +1,63 @@
+//import java.awt.peer.SystemTrayPeer;
+//import javafx.*;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+
+public class DisplayWindow extends Application implements EventHandler<ActionEvent> {
+    //image processing usually has five steps:
+    //1. The first step is image acquisition.... Where do you want to select this image from? Camera, already stored on device? Webcam, video?
+    //2. The second step is to pre-processing, where you remove image noise and enhance image characteristics
+    //3. The third step is segmentation of ROIS (to identify rois from background)
+    //4. Features Extraction: color intensities, textural features, and geometrical properties ---> matrix of features
+    //5. and final step is for classification where discriminant analysis, neural networks and fuzzy logic etc are taking into account
+
+    //-------------------------------------Button Declaration--------------------------------------------------------------------
+    Button selectImage;
+    Button processImage; // this button calls the process image function
+
+    public static void main(String[] args) {
+        launch(args);// calls launch and goes into application and sets up the program as a java fx app, which then calls start()
+
+
+    }// end of main
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        //----------Button for Selecting image details and where to place on screen------------------------------------
+        selectImage = new Button("Select Image");
+        selectImage.setOnAction(this);
+        selectImage.setMaxWidth(150.00);
+        selectImage.setLayoutX(375.00);
+        selectImage.setLayoutY(700.00);
+
+        Image image = new Image(new FileInputStream("./resources/images/morel.jpg"));// place the image source here
+        int width = (int)image.getWidth();
+        int height = (int)image.getHeight();
+        ImageView imageView = new ImageView(image);
+
+        imageView.setX(300.0);
+        imageView.setY(50.00);
+        imageView.setPreserveRatio(true);
+        Group base = new Group(imageView,selectImage);
+        Scene scene = new Scene(base,1000,1000);
+        primaryStage.setTitle("Morel Imaging Software");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    @Override
+    public void handle(ActionEvent event) {
+
+    }
+}
