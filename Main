@@ -1,0 +1,14 @@
+class Main {
+  public static void main(String[] args) {
+    System.out.println("Hello world!");
+    System.out.println("This is the result of sum(100): + " + sum(5));
+
+  }
+public static int sum(int number) {
+    if (number >= 1) {
+        return sum(number - 1) + number;
+    }
+    return number;
+}
+
+}
